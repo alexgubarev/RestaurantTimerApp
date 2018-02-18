@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Restaurant Timer App</string>
+    <string name="tv1">Bigger</string>
+    <string name="tv2">Strips</string>
+    <string name="tv3">Wings</string>
+    <string name="tv4">Bites</string>
+    <string name="tv5">Drumsticks</string>
+    <string name="tv6">Sanders</string>
+    <string name="tv7">French fries</string>
+    <string name="tv8">Salad</string>
+
+</resources>

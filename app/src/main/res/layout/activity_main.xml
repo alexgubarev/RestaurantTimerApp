@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.kfc.restauranttimerapp.MainActivity">
+
+    <ToggleButton
+        android:id="@+id/toggleButton1"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="ToggleButton"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toStartOf="@+id/toggleButton2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton2"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="ToggleButton"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toStartOf="@+id/toggleButton3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/toggleButton1" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton3"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="ToggleButton"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toStartOf="@+id/toggleButton4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/toggleButton2" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton4"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="ToggleButton"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/toggleButton3" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton5"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="ToggleButton"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toStartOf="@+id/toggleButton6"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton6"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="ToggleButton"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toStartOf="@+id/toggleButton7"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/toggleButton5" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton7"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="ToggleButton"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toStartOf="@+id/toggleButton8"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/toggleButton6" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton8"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="49dp"
+        android:layout_marginBottom="8dp"
+        android:text="ToggleButton"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/toggleButton7" />
+
+    <Chronometer
+        android:id="@+id/chronometer1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:countDown="true"
+        android:textSize="18sp"
+        android:transitionName="@string/tv1"
+        app:layout_constraintBottom_toTopOf="@+id/toggleButton1"
+        app:layout_constraintEnd_toEndOf="@+id/toggleButton1"
+        app:layout_constraintStart_toStartOf="@+id/toggleButton1" />
+
+    <Chronometer
+        android:id="@+id/chronometer2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:countDown="true"
+        android:textSize="18sp"
+        android:transitionName="@string/tv2"
+        app:layout_constraintBottom_toTopOf="@+id/toggleButton2"
+        app:layout_constraintEnd_toEndOf="@+id/toggleButton2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/toggleButton2" />
+
+    <Chronometer
+        android:id="@+id/chronometer3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:countDown="true"
+        android:textSize="18sp"
+        android:transitionName="@string/tv3"
+        app:layout_constraintBottom_toTopOf="@+id/toggleButton3"
+        app:layout_constraintEnd_toEndOf="@+id/toggleButton3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/toggleButton3" />
+
+    <Chronometer
+        android:id="@+id/chronometer4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:countDown="true"
+        android:textSize="18sp"
+        android:transitionName="@string/tv4"
+        app:layout_constraintBottom_toTopOf="@+id/toggleButton4"
+        app:layout_constraintEnd_toEndOf="@+id/toggleButton4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/toggleButton4" />
+
+    <Chronometer
+        android:id="@+id/chronometer5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:countDown="true"
+        android:textSize="18sp"
+        android:transitionName="@string/tv5"
+        app:layout_constraintBottom_toTopOf="@+id/toggleButton5"
+        app:layout_constraintEnd_toEndOf="@+id/toggleButton5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/toggleButton5" />
+
+    <Chronometer
+        android:id="@+id/chronometer6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:countDown="true"
+        android:textSize="18sp"
+        android:transitionName="@string/tv6"
+        app:layout_constraintBottom_toTopOf="@+id/toggleButton6"
+        app:layout_constraintEnd_toEndOf="@+id/toggleButton6"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/toggleButton6" />
+
+    <Chronometer
+        android:id="@+id/chronometer7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:countDown="true"
+        android:textSize="18sp"
+        android:transitionName="@string/tv7"
+        app:layout_constraintBottom_toTopOf="@+id/toggleButton7"
+        app:layout_constraintEnd_toEndOf="@+id/toggleButton7"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/toggleButton7" />
+
+    <Chronometer
+        android:id="@+id/chronometer8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:countDown="true"
+        android:textSize="18sp"
+        android:transitionName="@string/tv8"
+        app:layout_constraintBottom_toTopOf="@+id/toggleButton8"
+        app:layout_constraintEnd_toEndOf="@+id/toggleButton8"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/toggleButton8" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="466dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="482dp" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/tv1"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/chronometer1"
+        app:layout_constraintEnd_toEndOf="@+id/toggleButton1"
+        app:layout_constraintStart_toStartOf="@+id/toggleButton1" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/tv2"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/chronometer2"
+        app:layout_constraintEnd_toEndOf="@+id/toggleButton2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/toggleButton2" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/tv3"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/chronometer3"
+        app:layout_constraintEnd_toEndOf="@+id/toggleButton3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/toggleButton3" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/tv4"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/chronometer4"
+        app:layout_constraintEnd_toEndOf="@+id/toggleButton4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/toggleButton4" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/tv5"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/chronometer5"
+        app:layout_constraintEnd_toEndOf="@+id/toggleButton5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/toggleButton5" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/tv6"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/chronometer6"
+        app:layout_constraintEnd_toEndOf="@+id/toggleButton6"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/toggleButton6" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/tv7"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/chronometer7"
+        app:layout_constraintEnd_toEndOf="@+id/toggleButton7"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/toggleButton7" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/tv8"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/chronometer8"
+        app:layout_constraintEnd_toEndOf="@+id/toggleButton8"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/toggleButton8" />
+
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:timePickerMode="spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.135"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        app:layout_constraintVertical_bias="0.524" />
+
+</android.support.constraint.ConstraintLayout>
