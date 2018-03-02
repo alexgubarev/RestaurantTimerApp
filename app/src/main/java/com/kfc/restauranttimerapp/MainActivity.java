@@ -1,5 +1,4 @@
 package com.kfc.restauranttimerapp;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -11,13 +10,21 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.CompoundButton;
-import android.widget.TimePicker;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-public class MainActivity extends AppCompatActivity implements Chronometer.OnChronometerTickListener {
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity implements Chronometer.OnChronometerTickListener, CompoundButton.OnCheckedChangeListener {
+
+    Button button;
+    EditText editText;
+    Spinner spinner;
 
     private Chronometer mChronometer1;
     private Chronometer mChronometer2;
@@ -28,16 +35,8 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
     private Chronometer mChronometer7;
     private Chronometer mChronometer8;
 
-    long t1 = 10;
-    long t2 = 180;
-    long t3 = 60;
-    long t4 = 240;
-    long t5 = 300;
-    long t6 = 360;
-    long t7 = 120;
-    long t8 = 180;
+    ArrayList<Integer> arrayList;
 
-    private TimePicker timePicker;
     private Ringtone r;
     private Animation anim;
 
@@ -45,6 +44,21 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        arrayList = new ArrayList<>();
+
+        arrayList.add(10);
+        arrayList.add(180);
+        arrayList.add(60);
+        arrayList.add(240);
+        arrayList.add(300);
+        arrayList.add(360);
+        arrayList.add(120);
+        arrayList.add(180);
+
+        button = findViewById(R.id.button);
+        spinner = findViewById(R.id.spinner3);
+        editText = findViewById(R.id.editText);
 
         mChronometer1 = findViewById(R.id.chronometer1);
         mChronometer2 = findViewById(R.id.chronometer2);
@@ -66,27 +80,14 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
 
 
         // установим начальное значение
-        mChronometer1.setBase(SystemClock.elapsedRealtime() + 1000 * t1);
-        mChronometer2.setBase(SystemClock.elapsedRealtime() + 1000 * t2);
-        mChronometer3.setBase(SystemClock.elapsedRealtime() + 1000 * t3);
-        mChronometer4.setBase(SystemClock.elapsedRealtime() + 1000 * t4);
-        mChronometer5.setBase(SystemClock.elapsedRealtime() + 1000 * t5);
-        mChronometer6.setBase(SystemClock.elapsedRealtime() + 1000 * t6);
-        mChronometer7.setBase(SystemClock.elapsedRealtime() + 1000 * t7);
-        mChronometer8.setBase(SystemClock.elapsedRealtime() + 1000 * t8);
-
-        timePicker = findViewById(R.id.timePicker);
-        timePicker.setIs24HourView(true);
-//        timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
-//            @Override
-//            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-//                mChronometer1.setBase(SystemClock.elapsedRealtime() + 1000 * minute);
-//                t1 = minute;
-//
-//            }
-//        });
-
-
+        mChronometer1.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(0));
+        mChronometer2.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(1));
+        mChronometer3.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(2));
+        mChronometer4.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(3));
+        mChronometer5.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(4));
+        mChronometer6.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(5));
+        mChronometer7.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(6));
+        mChronometer8.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(7));
 
         mChronometer1.setOnChronometerTickListener(this);
         mChronometer2.setOnChronometerTickListener(this);
@@ -97,14 +98,16 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
         mChronometer7.setOnChronometerTickListener(this);
         mChronometer8.setOnChronometerTickListener(this);
 
-        onCheckChange(toggle1, mChronometer1, t1);
-        onCheckChange(toggle2, mChronometer2, t2);
-        onCheckChange(toggle3, mChronometer3, t3);
-        onCheckChange(toggle4, mChronometer4, t4);
-        onCheckChange(toggle5, mChronometer5, t5);
-        onCheckChange(toggle6, mChronometer6, t6);
-        onCheckChange(toggle7, mChronometer7, t7);
-        onCheckChange(toggle8, mChronometer8, t8);
+
+        toggle1.setOnCheckedChangeListener(this);
+        toggle2.setOnCheckedChangeListener(this);
+        toggle3.setOnCheckedChangeListener(this);
+        toggle4.setOnCheckedChangeListener(this);
+        toggle5.setOnCheckedChangeListener(this);
+        toggle6.setOnCheckedChangeListener(this);
+        toggle7.setOnCheckedChangeListener(this);
+        toggle8.setOnCheckedChangeListener(this);
+
 
         Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         r = RingtoneManager.getRingtone(getApplicationContext(), notification);
@@ -126,28 +129,155 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
             anim.setRepeatCount(Animation.INFINITE);
             chronometer.setTextColor(Color.RED);
             chronometer.startAnimation(anim);
-
-
         }
+    }
 
+    public void onClick(View view) {
+        Log.d("myLog", "spinner position = " + spinner.getSelectedItemPosition());
+        String mtime;
+        switch (spinner.getSelectedItemPosition()){
+            case 0:
+                mtime = editText.getText().toString();
+                arrayList.set(0, Integer.parseInt(mtime));
+                mChronometer1.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(0));
+                break;
+            case 1:
+                mtime = editText.getText().toString();
+                arrayList.set(1, Integer.parseInt(mtime));
+                mChronometer2.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(1));
+                break;
+            case 2:
+                mtime = editText.getText().toString();
+                arrayList.set(2, Integer.parseInt(mtime));
+                mChronometer3.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(2));
+                break;
+            case 3:
+                mtime = editText.getText().toString();
+                arrayList.set(3, Integer.parseInt(mtime));
+                mChronometer4.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(3));
+                break;
+            case 4:
+                mtime = editText.getText().toString();
+                arrayList.set(4, Integer.parseInt(mtime));
+                mChronometer5.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(4));
+                break;
+            case 5:
+                mtime = editText.getText().toString();
+                arrayList.set(5, Integer.parseInt(mtime));
+                mChronometer6.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(5));
+                break;
+            case 6:
+                mtime = editText.getText().toString();
+                arrayList.set(6, Integer.parseInt(mtime));
+                mChronometer7.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(6));
+                break;
+            case 7:
+                mtime = editText.getText().toString();
+                arrayList.set(7, Integer.parseInt(mtime));
+                mChronometer8.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(7));
+                break;
         }
+    }
 
-
-    private void onCheckChange(ToggleButton toggle, final Chronometer chronometer, final long time) {
-        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    chronometer.setBase(SystemClock.elapsedRealtime() + 1000 * time);
-                    chronometer.start();
-                } else {
-                    chronometer.stop();
-                    r.stop();
-                    chronometer.clearAnimation();
-                    chronometer.setTextColor(Color.WHITE);
-                    chronometer.setBase(SystemClock.elapsedRealtime() + 1000 * time);
-                }
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked) {
+            switch (buttonView.getId()){
+                case R.id.toggleButton1:
+                    mChronometer1.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(0));
+                    mChronometer1.start();
+                    break;
+                case R.id.toggleButton2:
+                    mChronometer2.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(1));
+                    mChronometer2.start();
+                    break;
+                case R.id.toggleButton3:
+                    mChronometer3.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(2));
+                    mChronometer3.start();
+                    break;
+                case R.id.toggleButton4:
+                    mChronometer4.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(3));
+                    mChronometer4.start();
+                    break;
+                case R.id.toggleButton5:
+                    mChronometer5.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(4));
+                    mChronometer5.start();
+                    break;
+                case R.id.toggleButton6:
+                    mChronometer6.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(5));
+                    mChronometer6.start();
+                    break;
+                case R.id.toggleButton7:
+                    mChronometer7.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(6));
+                    mChronometer7.start();
+                    break;
+                case R.id.toggleButton8:
+                    mChronometer8.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(7));
+                    mChronometer8.start();
+                    break;
             }
-        });
+
+        } else {
+            switch (buttonView.getId()){
+                case R.id.toggleButton1:
+                    mChronometer1.stop();
+                    r.stop();
+                    mChronometer1.clearAnimation();
+                    mChronometer1.setTextColor(Color.WHITE);
+                    mChronometer1.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(0));
+                    break;
+                case R.id.toggleButton2:
+                    mChronometer2.stop();
+                    r.stop();
+                    mChronometer2.clearAnimation();
+                    mChronometer2.setTextColor(Color.WHITE);
+                    mChronometer2.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(1));
+                    break;
+                case R.id.toggleButton3:
+                    mChronometer3.stop();
+                    r.stop();
+                    mChronometer3.clearAnimation();
+                    mChronometer3.setTextColor(Color.WHITE);
+                    mChronometer3.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(2));
+                    break;
+                case R.id.toggleButton4:
+                    mChronometer4.stop();
+                    r.stop();
+                    mChronometer4.clearAnimation();
+                    mChronometer4.setTextColor(Color.WHITE);
+                    mChronometer4.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(3));
+                    break;
+                case R.id.toggleButton5:
+                    mChronometer5.stop();
+                    r.stop();
+                    mChronometer5.clearAnimation();
+                    mChronometer5.setTextColor(Color.WHITE);
+                    mChronometer5.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(4));
+                    break;
+                case R.id.toggleButton6:
+                    mChronometer6.stop();
+                    r.stop();
+                    mChronometer6.clearAnimation();
+                    mChronometer6.setTextColor(Color.WHITE);
+                    mChronometer6.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(5));
+                    break;
+                case R.id.toggleButton7:
+                    mChronometer7.stop();
+                    r.stop();
+                    mChronometer7.clearAnimation();
+                    mChronometer7.setTextColor(Color.WHITE);
+                    mChronometer7.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(6));
+                    break;
+                case R.id.toggleButton8:
+                    mChronometer8.stop();
+                    r.stop();
+                    mChronometer8.clearAnimation();
+                    mChronometer8.setTextColor(Color.WHITE);
+                    mChronometer8.setBase(SystemClock.elapsedRealtime() + 1000 * arrayList.get(7));
+                    break;
+
+            }
+
+        }
     }
 }
