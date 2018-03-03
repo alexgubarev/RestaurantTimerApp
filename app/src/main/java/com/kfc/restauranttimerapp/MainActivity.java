@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
     Map<Integer, Chronometer> chronometerMap = new HashMap();
     Map<Integer, Integer> toggleButtonChronometerMap = new HashMap<>();
     Map<Integer, Integer> timeValuesChronometerIdMap = new HashMap<>();
+    ArrayList<ToggleButton> toggleButtonList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,8 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
         chronometerMap.put(1, (Chronometer) findViewById(R.id.chronometer1));
         toggleButtonChronometerMap.put(R.id.toggleButton1, R.id.chronometer1);
         timeValuesChronometerIdMap.put(R.id.chronometer1, 10);
+        toggleButtonList = new ArrayList<>();
+        toggleButtonList.add(toggleButton1);
 
         // установим начальное значение
         chronometer1.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(0));
@@ -136,13 +139,23 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         int chronometerId = toggleButtonChronometerMap.get(buttonView.getId());
-        Chronometer chronometer = findViewById(chronometerId);
+        Chronometer chronometer = findViewById (chronometerId);
+        boolean isAllNotChecked = true;
+        for (ToggleButton toggleButton : toggleButtonList){
+            if (toggleButton.isChecked()) {
+                isAllNotChecked = false;
+                break;
+            }
+        }
         if (isChecked) {
             chronometer.setBase(SystemClock.elapsedRealtime() + 1000 * timeValuesChronometerIdMap.get(chronometerId));
             chronometer.start();
         } else {
             chronometer.stop();
-            ringtone.stop();
+            if (isAllNotChecked){
+                ringtone.stop();
+            }
+
             chronometer.clearAnimation();
             chronometer.setTextColor(Color.WHITE);
             chronometer.setBase(SystemClock.elapsedRealtime() + 1000 * timeValuesChronometerIdMap.get(chronometerId));
