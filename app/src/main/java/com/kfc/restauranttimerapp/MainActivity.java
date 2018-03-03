@@ -19,9 +19,12 @@ import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements Chronometer.OnChronometerTickListener, CompoundButton.OnCheckedChangeListener {
 
+    private static final int POSITION_INDEX_SHIFT = 1;
     EditText editText;
     Spinner spinner;
     Chronometer chronometer1;
@@ -34,6 +37,9 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
     Chronometer chronometer8;
     ArrayList<Integer> timeValues;
     Ringtone ringtone;
+    Map<Integer, Chronometer> chronometerMap = new HashMap();
+    Map<Integer, Integer> toggleButtonChronometerMap = new HashMap<>();
+    Map<Integer, Integer> timeValuesChronometerIdMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
 
         spinner = findViewById(R.id.spinner3);
         editText = findViewById(R.id.editText);
+
+
         chronometer1 = findViewById(R.id.chronometer1);
         chronometer2 = findViewById(R.id.chronometer2);
         chronometer3 = findViewById(R.id.chronometer3);
@@ -61,6 +69,10 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
 
         timeValues = new ArrayList<>();
         timeValues.addAll(Arrays.asList(10, 180, 60, 240, 300, 360, 120, 180));
+
+        chronometerMap.put(1, (Chronometer) findViewById(R.id.chronometer1));
+        toggleButtonChronometerMap.put(R.id.toggleButton1, R.id.chronometer1);
+        timeValuesChronometerIdMap.put(R.id.chronometer1, 10);
 
         // установим начальное значение
         chronometer1.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(0));
@@ -114,139 +126,26 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
 
     public void onClick(View view) {
         String time = editText.getText().toString();
-        switch (spinner.getSelectedItemPosition()) {
-            case 0:
-                timeValues.set(0, Integer.parseInt(time));
-                chronometer1.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(0));
-                break;
-            case 1:
-                timeValues.set(1, Integer.parseInt(time));
-                chronometer2.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(1));
-                break;
-            case 2:
-                timeValues.set(2, Integer.parseInt(time));
-                chronometer3.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(2));
-                break;
-            case 3:
-                timeValues.set(3, Integer.parseInt(time));
-                chronometer4.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(3));
-                break;
-            case 4:
-                timeValues.set(4, Integer.parseInt(time));
-                chronometer5.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(4));
-                break;
-            case 5:
-                timeValues.set(5, Integer.parseInt(time));
-                chronometer6.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(5));
-                break;
-            case 6:
-                timeValues.set(6, Integer.parseInt(time));
-                chronometer7.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(6));
-                break;
-            case 7:
-                timeValues.set(7, Integer.parseInt(time));
-                chronometer8.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(7));
-                break;
-        }
+        int position = spinner.getSelectedItemPosition() + POSITION_INDEX_SHIFT;
+        Chronometer chr = chronometerMap.get(position);
+        timeValuesChronometerIdMap.put(chr.getId(), Integer.parseInt(time));
+        chr.setBase(SystemClock.elapsedRealtime() + 1000 * timeValuesChronometerIdMap.get(chr.getId()));
+
     }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        int chronometerId = toggleButtonChronometerMap.get(buttonView.getId());
+        Chronometer chronometer = findViewById(chronometerId);
         if (isChecked) {
-            switch (buttonView.getId()) {
-                case R.id.toggleButton1:
-                    chronometer1.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(0));
-                    chronometer1.start();
-                    break;
-                case R.id.toggleButton2:
-                    chronometer2.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(1));
-                    chronometer2.start();
-                    break;
-                case R.id.toggleButton3:
-                    chronometer3.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(2));
-                    chronometer3.start();
-                    break;
-                case R.id.toggleButton4:
-                    chronometer4.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(3));
-                    chronometer4.start();
-                    break;
-                case R.id.toggleButton5:
-                    chronometer5.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(4));
-                    chronometer5.start();
-                    break;
-                case R.id.toggleButton6:
-                    chronometer6.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(5));
-                    chronometer6.start();
-                    break;
-                case R.id.toggleButton7:
-                    chronometer7.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(6));
-                    chronometer7.start();
-                    break;
-                case R.id.toggleButton8:
-                    chronometer8.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(7));
-                    chronometer8.start();
-                    break;
-            }
-
+            chronometer.setBase(SystemClock.elapsedRealtime() + 1000 * timeValuesChronometerIdMap.get(chronometerId));
+            chronometer.start();
         } else {
-            switch (buttonView.getId()) {
-                case R.id.toggleButton1:
-                    chronometer1.stop();
-                    ringtone.stop();
-                    chronometer1.clearAnimation();
-                    chronometer1.setTextColor(Color.WHITE);
-                    chronometer1.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(0));
-                    break;
-                case R.id.toggleButton2:
-                    chronometer2.stop();
-                    ringtone.stop();
-                    chronometer2.clearAnimation();
-                    chronometer2.setTextColor(Color.WHITE);
-                    chronometer2.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(1));
-                    break;
-                case R.id.toggleButton3:
-                    chronometer3.stop();
-                    ringtone.stop();
-                    chronometer3.clearAnimation();
-                    chronometer3.setTextColor(Color.WHITE);
-                    chronometer3.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(2));
-                    break;
-                case R.id.toggleButton4:
-                    chronometer4.stop();
-                    ringtone.stop();
-                    chronometer4.clearAnimation();
-                    chronometer4.setTextColor(Color.WHITE);
-                    chronometer4.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(3));
-                    break;
-                case R.id.toggleButton5:
-                    chronometer5.stop();
-                    ringtone.stop();
-                    chronometer5.clearAnimation();
-                    chronometer5.setTextColor(Color.WHITE);
-                    chronometer5.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(4));
-                    break;
-                case R.id.toggleButton6:
-                    chronometer6.stop();
-                    ringtone.stop();
-                    chronometer6.clearAnimation();
-                    chronometer6.setTextColor(Color.WHITE);
-                    chronometer6.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(5));
-                    break;
-                case R.id.toggleButton7:
-                    chronometer7.stop();
-                    ringtone.stop();
-                    chronometer7.clearAnimation();
-                    chronometer7.setTextColor(Color.WHITE);
-                    chronometer7.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(6));
-                    break;
-                case R.id.toggleButton8:
-                    chronometer8.stop();
-                    ringtone.stop();
-                    chronometer8.clearAnimation();
-                    chronometer8.setTextColor(Color.WHITE);
-                    chronometer8.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(7));
-                    break;
-            }
+            chronometer.stop();
+            ringtone.stop();
+            chronometer.clearAnimation();
+            chronometer.setTextColor(Color.WHITE);
+            chronometer.setBase(SystemClock.elapsedRealtime() + 1000 * timeValuesChronometerIdMap.get(chronometerId));
         }
     }
 }
