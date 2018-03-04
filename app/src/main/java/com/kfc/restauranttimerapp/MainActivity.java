@@ -16,7 +16,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -87,11 +86,15 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
 
     public void onClick(View view) {
         String time = editText.getText().toString();
-        int position = spinner.getSelectedItemPosition() + POSITION_INDEX_SHIFT;
-        Chronometer chr = chronometerMap.get(position);
-        timeValuesChronometerIdMap.put(chr.getId(), Integer.parseInt(time));
-        chr.setBase(SystemClock.elapsedRealtime() + 1000 * timeValuesChronometerIdMap.get(chr.getId()));
+        if (!time.isEmpty()) {
+            int position = spinner.getSelectedItemPosition() + POSITION_INDEX_SHIFT;
+            Chronometer chr = chronometerMap.get(position);
+            timeValuesChronometerIdMap.put(chr.getId(), Integer.parseInt(time));
+            chr.setBase(SystemClock.elapsedRealtime() + 1000 * timeValuesChronometerIdMap.get(chr.getId()));
+        } else
+            Toast.makeText(this, "Please enter number of seconds to set", Toast.LENGTH_SHORT).show();
     }
+
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -112,7 +115,6 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
             if (isAllNotChecked) {
                 ringtone.stop();
             }
-
             chronometer.clearAnimation();
             chronometer.setTextColor(Color.WHITE);
             chronometer.setBase(SystemClock.elapsedRealtime() + 1000 * timeValuesChronometerIdMap.get(chronometerId));
