@@ -8,6 +8,18 @@
     <string name="tv6">Sanders</string>
     <string name="tv7">French fries</string>
     <string name="tv8">Salad</string>
+    <string name="btnReset">Reset all timers</string>
+    <string name="btnApply">Apply changes</string>
+    <string name="reset">Reset</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+
 
     <string-array name="chronometerId">
         <item>1</item>

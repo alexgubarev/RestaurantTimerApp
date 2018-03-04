@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
         }
     }
 
-    public void onClick(View view) {
+    public void onClickApplyBtn(View view) {
         String time = editText.getText().toString();
         if (!time.isEmpty()) {
             int position = spinner.getSelectedItemPosition() + POSITION_INDEX_SHIFT;
@@ -118,6 +119,12 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
             chronometer.clearAnimation();
             chronometer.setTextColor(Color.WHITE);
             chronometer.setBase(SystemClock.elapsedRealtime() + 1000 * timeValuesChronometerIdMap.get(chronometerId));
+        }
+    }
+
+    public void onClickResetBtn(View view) {
+        for (ToggleButton toggleButton : toggleButtonList) {
+            toggleButton.setChecked(false);
         }
     }
 }

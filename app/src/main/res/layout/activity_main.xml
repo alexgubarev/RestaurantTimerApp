@@ -8,116 +8,114 @@
 
     <ToggleButton
         android:id="@+id/toggleButton1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="ToggleButton"
+        android:background="@drawable/toggle_selector"
+        android:textOff="@string/one"
+        android:textOn="@string/reset"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/chronometer1"
-        app:layout_constraintStart_toEndOf="@+id/chronometer1"
-        app:layout_constraintTop_toTopOf="@+id/chronometer1"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toBottomOf="@+id/toggleButton2"
+        app:layout_constraintStart_toEndOf="@+id/chronometer1" />
 
     <ToggleButton
         android:id="@+id/toggleButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="ToggleButton"
+        android:background="@drawable/toggle_selector"
+        android:textOff="@string/two"
+        android:textOn="@string/reset"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/chronometer2"
-        app:layout_constraintStart_toEndOf="@+id/chronometer2"
-        app:layout_constraintTop_toTopOf="@+id/chronometer2" />
+        app:layout_constraintBottom_toBottomOf="@+id/toggleButton3"
+        app:layout_constraintStart_toEndOf="@+id/chronometer2" />
 
     <ToggleButton
         android:id="@+id/toggleButton3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="ToggleButton"
+        android:background="@drawable/toggle_selector"
+        android:textOff="@string/three"
+        android:textOn="@string/reset"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/chronometer3"
-        app:layout_constraintStart_toEndOf="@+id/chronometer3"
-        app:layout_constraintTop_toTopOf="@+id/chronometer3" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintStart_toEndOf="@+id/chronometer3" />
 
     <ToggleButton
         android:id="@+id/toggleButton4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="ToggleButton"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/toggle_selector"
+        android:textOff="@string/four"
+        android:textOn="@string/reset"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/chronometer4"
-        app:layout_constraintStart_toEndOf="@+id/chronometer4"
-        app:layout_constraintTop_toTopOf="@+id/chronometer4" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline3" />
 
     <ToggleButton
         android:id="@+id/toggleButton5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="ToggleButton"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/toggle_selector"
+        android:textOff="@string/five"
+        android:textOn="@string/reset"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toStartOf="@+id/toggleButton6"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/chronometer5"
+        app:layout_constraintStart_toEndOf="@+id/chronometer5" />
 
     <ToggleButton
         android:id="@+id/toggleButton6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="ToggleButton"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toStartOf="@+id/toggleButton7"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/toggleButton5" />
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/toggle_selector"
+        android:textOff="@string/six"
+        android:textOn="@string/reset"
+        app:layout_constraintBottom_toBottomOf="@+id/toggleButton5"
+        app:layout_constraintStart_toEndOf="@+id/chronometer6" />
+
 
     <ToggleButton
         android:id="@+id/toggleButton7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="ToggleButton"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/toggle_selector"
+        android:textOff="@string/seven"
+        android:textOn="@string/reset"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toStartOf="@+id/toggleButton8"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/toggleButton6" />
+        app:layout_constraintBottom_toBottomOf="@+id/toggleButton5"
+        app:layout_constraintStart_toEndOf="@+id/chronometer7" />
 
     <ToggleButton
         android:id="@+id/toggleButton8"
-        android:layout_width="wrap_content"
-        android:layout_height="49dp"
-        android:layout_marginBottom="8dp"
-        android:text="ToggleButton"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/toggle_selector"
+        android:textOff="@string/eight"
+        android:textOn="@string/reset"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/toggleButton7" />
+        app:layout_constraintBottom_toBottomOf="@+id/toggleButton5"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3" />
 
     <Chronometer
         android:id="@+id/chronometer1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
         android:countDown="true"
         android:textSize="48sp"
         android:transitionName="@string/tv1"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/chronometer2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="@+id/guideline5" />
 
     <Chronometer
         android:id="@+id/chronometer2"
@@ -150,11 +148,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         android:countDown="true"
         android:textSize="48sp"
         android:transitionName="@string/tv4"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/toggleButton4"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/chronometer3" />
 
@@ -162,60 +161,53 @@
         android:id="@+id/chronometer5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="64dp"
         android:layout_marginStart="8dp"
         android:countDown="true"
-        android:textSize="18sp"
+        android:textSize="48sp"
         android:transitionName="@string/tv5"
-        app:layout_constraintBottom_toTopOf="@+id/toggleButton5"
-        app:layout_constraintEnd_toEndOf="@+id/toggleButton5"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toStartOf="@+id/chronometer6"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/toggleButton5" />
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="@+id/guideline5" />
 
     <Chronometer
         android:id="@+id/chronometer6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:countDown="true"
-        android:textSize="18sp"
+        android:textSize="48sp"
         android:transitionName="@string/tv6"
-        app:layout_constraintBottom_toTopOf="@+id/toggleButton6"
-        app:layout_constraintEnd_toEndOf="@+id/toggleButton6"
+        app:layout_constraintBottom_toBottomOf="@+id/chronometer5"
+        app:layout_constraintEnd_toStartOf="@+id/chronometer7"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/toggleButton6" />
+        app:layout_constraintStart_toEndOf="@+id/chronometer5" />
 
     <Chronometer
         android:id="@+id/chronometer7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:countDown="true"
-        android:textSize="18sp"
+        android:textSize="48sp"
         android:transitionName="@string/tv7"
-        app:layout_constraintBottom_toTopOf="@+id/toggleButton7"
-        app:layout_constraintEnd_toEndOf="@+id/toggleButton7"
+        app:layout_constraintBottom_toBottomOf="@+id/chronometer5"
+        app:layout_constraintEnd_toStartOf="@+id/chronometer8"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/toggleButton7" />
+        app:layout_constraintStart_toEndOf="@+id/chronometer6" />
 
     <Chronometer
         android:id="@+id/chronometer8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:countDown="true"
-        android:textSize="18sp"
+        android:textSize="48sp"
         android:transitionName="@string/tv8"
-        app:layout_constraintBottom_toTopOf="@+id/toggleButton8"
-        app:layout_constraintEnd_toEndOf="@+id/toggleButton8"
+        app:layout_constraintBottom_toBottomOf="@+id/chronometer7"
+        app:layout_constraintEnd_toStartOf="@+id/toggleButton8"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/toggleButton8" />
+        app:layout_constraintStart_toEndOf="@+id/chronometer7" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
@@ -226,8 +218,8 @@
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:orientation="horizontal"
         app:layout_constraintGuide_end="482dp" />
 
@@ -236,11 +228,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:text="@string/tv1"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/chronometer1"
-        app:layout_constraintEnd_toEndOf="@+id/chronometer1"
         app:layout_constraintStart_toStartOf="@+id/chronometer1" />
 
     <TextView
@@ -248,24 +238,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
         android:text="@string/tv2"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/chronometer2"
-        app:layout_constraintEnd_toEndOf="@+id/chronometer2"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/chronometer2" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
         android:text="@string/tv3"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/chronometer3"
-        app:layout_constraintEnd_toEndOf="@+id/chronometer3"
         app:layout_constraintStart_toStartOf="@+id/chronometer3" />
 
     <TextView
@@ -273,12 +258,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:text="@string/tv4"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/chronometer4"
-        app:layout_constraintEnd_toEndOf="@+id/chronometer4"
         app:layout_constraintStart_toStartOf="@+id/chronometer4" />
 
     <TextView
@@ -286,66 +268,52 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
         android:text="@string/tv5"
-        android:textSize="18sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/chronometer5"
-        app:layout_constraintEnd_toEndOf="@+id/toggleButton5"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/toggleButton5" />
+        app:layout_constraintStart_toStartOf="@+id/chronometer5" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
         android:text="@string/tv6"
-        android:textSize="18sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/chronometer6"
-        app:layout_constraintEnd_toEndOf="@+id/toggleButton6"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/toggleButton6" />
+        app:layout_constraintStart_toStartOf="@+id/chronometer6" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
         android:text="@string/tv7"
-        android:textSize="18sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/chronometer7"
-        app:layout_constraintEnd_toEndOf="@+id/toggleButton7"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/toggleButton7" />
+        app:layout_constraintStart_toStartOf="@+id/chronometer7" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:text="@string/tv8"
-        android:textSize="18sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/chronometer8"
-        app:layout_constraintEnd_toEndOf="@+id/toggleButton8"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/toggleButton8" />
+        app:layout_constraintStart_toStartOf="@+id/chronometer8" />
 
     <Spinner
         android:id="@+id/spinner3"
-        android:layout_width="107dp"
-        android:layout_height="25dp"
+        android:layout_width="76dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:entries="@array/chronometerId"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/toggleButton5"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/toggleButton5"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <EditText
@@ -353,22 +321,46 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="@+id/spinner3"
-        app:layout_constraintStart_toEndOf="@+id/spinner3"
-        app:layout_constraintTop_toTopOf="@+id/spinner3" />
+        android:textSize="24sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/spinner3"
+        app:layout_constraintStart_toEndOf="@+id/spinner3" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:onClick="onClick"
-        android:text="Apply changes"
-        app:layout_constraintBottom_toBottomOf="@+id/editText"
-        app:layout_constraintStart_toEndOf="@+id/editText"
-        app:layout_constraintTop_toTopOf="@+id/editText" />
+        android:onClick="onClickApplyBtn"
+        android:text="@string/btnApply"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editText"
+        app:layout_constraintStart_toEndOf="@+id/editText" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="992dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="965dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:onClick="onClickResetBtn"
+        android:text="@string/btnReset"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/button"
+        app:layout_constraintStart_toEndOf="@+id/chronometer7" />
 
 </android.support.constraint.ConstraintLayout>
