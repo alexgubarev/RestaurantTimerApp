@@ -18,7 +18,6 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,15 +26,6 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
     private static final int POSITION_INDEX_SHIFT = 1;
     EditText editText;
     Spinner spinner;
-    Chronometer chronometer1;
-    Chronometer chronometer2;
-    Chronometer chronometer3;
-    Chronometer chronometer4;
-    Chronometer chronometer5;
-    Chronometer chronometer6;
-    Chronometer chronometer7;
-    Chronometer chronometer8;
-    ArrayList<Integer> timeValues;
     Ringtone ringtone;
     Map<Integer, Chronometer> chronometerMap = new HashMap();
     Map<Integer, Integer> toggleButtonChronometerMap = new HashMap<>();
@@ -49,64 +39,32 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
 
         spinner = findViewById(R.id.spinner3);
         editText = findViewById(R.id.editText);
-
-
-        chronometer1 = findViewById(R.id.chronometer1);
-        chronometer2 = findViewById(R.id.chronometer2);
-        chronometer3 = findViewById(R.id.chronometer3);
-        chronometer4 = findViewById(R.id.chronometer4);
-        chronometer5 = findViewById(R.id.chronometer5);
-        chronometer6 = findViewById(R.id.chronometer6);
-        chronometer7 = findViewById(R.id.chronometer7);
-        chronometer8 = findViewById(R.id.chronometer8);
-        ToggleButton toggleButton1 = findViewById(R.id.toggleButton1);
-        ToggleButton toggleButton2 = findViewById(R.id.toggleButton2);
-        ToggleButton toggleButton3 = findViewById(R.id.toggleButton3);
-        ToggleButton toggleButton4 = findViewById(R.id.toggleButton4);
-        ToggleButton toggleButton5 = findViewById(R.id.toggleButton5);
-        ToggleButton toggleButton6 = findViewById(R.id.toggleButton6);
-        ToggleButton toggleButton7 = findViewById(R.id.toggleButton7);
-        ToggleButton toggleButton8 = findViewById(R.id.toggleButton8);
-
-        timeValues = new ArrayList<>();
-        timeValues.addAll(Arrays.asList(10, 180, 60, 240, 300, 360, 120, 180));
-
-        chronometerMap.put(1, (Chronometer) findViewById(R.id.chronometer1));
-        toggleButtonChronometerMap.put(R.id.toggleButton1, R.id.chronometer1);
-        timeValuesChronometerIdMap.put(R.id.chronometer1, 10);
         toggleButtonList = new ArrayList<>();
-        toggleButtonList.add(toggleButton1);
 
-        // установим начальное значение
-        chronometer1.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(0));
-        chronometer2.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(1));
-        chronometer3.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(2));
-        chronometer4.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(3));
-        chronometer5.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(4));
-        chronometer6.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(5));
-        chronometer7.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(6));
-        chronometer8.setBase(SystemClock.elapsedRealtime() + 1000 * timeValues.get(7));
-
-        chronometer1.setOnChronometerTickListener(this);
-        chronometer2.setOnChronometerTickListener(this);
-        chronometer3.setOnChronometerTickListener(this);
-        chronometer4.setOnChronometerTickListener(this);
-        chronometer5.setOnChronometerTickListener(this);
-        chronometer6.setOnChronometerTickListener(this);
-        chronometer7.setOnChronometerTickListener(this);
-        chronometer8.setOnChronometerTickListener(this);
-
-        toggleButton1.setOnCheckedChangeListener(this);
-        toggleButton2.setOnCheckedChangeListener(this);
-        toggleButton3.setOnCheckedChangeListener(this);
-        toggleButton4.setOnCheckedChangeListener(this);
-        toggleButton5.setOnCheckedChangeListener(this);
-        toggleButton6.setOnCheckedChangeListener(this);
-        toggleButton7.setOnCheckedChangeListener(this);
-        toggleButton8.setOnCheckedChangeListener(this);
+        initializationLoop();
 
         Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         ringtone = RingtoneManager.getRingtone(getApplicationContext(), notification);
+    }
+
+    private void initializationLoop() {
+        for (int i = 1; i < 9; i++) {
+            String chronometerName = "chronometer" + i;
+            String toggleButtonName = "toggleButton" + i;
+            int chronometerId = getResources().getIdentifier(chronometerName, "id", getPackageName());
+            int toggleButtonId = getResources().getIdentifier(toggleButtonName, "id", getPackageName());
+
+            timeValuesChronometerIdMap.put(chronometerId, 10 + i * 2);
+
+            chronometerMap.put(i, (Chronometer) findViewById(chronometerId));
+            chronometerMap.get(i).setBase(SystemClock.elapsedRealtime() + 1000 * timeValuesChronometerIdMap.get(chronometerId));
+            chronometerMap.get(i).setOnChronometerTickListener(this);
+
+            toggleButtonChronometerMap.put(toggleButtonId, chronometerId);
+
+            toggleButtonList.add((ToggleButton) findViewById(toggleButtonId));
+            toggleButtonList.get(i - POSITION_INDEX_SHIFT).setOnCheckedChangeListener(this);
+        }
     }
 
     @Override
@@ -133,15 +91,14 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
         Chronometer chr = chronometerMap.get(position);
         timeValuesChronometerIdMap.put(chr.getId(), Integer.parseInt(time));
         chr.setBase(SystemClock.elapsedRealtime() + 1000 * timeValuesChronometerIdMap.get(chr.getId()));
-
     }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         int chronometerId = toggleButtonChronometerMap.get(buttonView.getId());
-        Chronometer chronometer = findViewById (chronometerId);
+        Chronometer chronometer = findViewById(chronometerId);
         boolean isAllNotChecked = true;
-        for (ToggleButton toggleButton : toggleButtonList){
+        for (ToggleButton toggleButton : toggleButtonList) {
             if (toggleButton.isChecked()) {
                 isAllNotChecked = false;
                 break;
@@ -152,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
             chronometer.start();
         } else {
             chronometer.stop();
-            if (isAllNotChecked){
+            if (isAllNotChecked) {
                 ringtone.stop();
             }
 
