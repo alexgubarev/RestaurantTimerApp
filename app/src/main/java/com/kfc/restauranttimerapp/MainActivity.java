@@ -1,5 +1,6 @@
 package com.kfc.restauranttimerapp;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -24,17 +25,21 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity implements Chronometer.OnChronometerTickListener, CompoundButton.OnCheckedChangeListener {
 
     private static final int POSITION_INDEX_SHIFT = 1;
-    String chronometer = "chronometer";
-    String toggleButton = "toggleButton";
-    String chrCurrentTime = "chronometerCurrentTime";
-    String chrStartTime = "chronometerStartTime";
+    private static final int BASE_TIME = 1000;
+    public static int ANIM_DURATION = 60;
+    int chronometerId;
+    int toggleButtonId;
     EditText editText;
     Spinner spinner;
     Ringtone ringtone;
-    Map<Integer, Chronometer> chronometerMap = new HashMap();
+    Uri notification;
+    @SuppressLint("UseSparseArrays")
+    HashMap<Integer, Chronometer> chronometerMap = new HashMap<>();
+    @SuppressLint("UseSparseArrays")
     Map<Integer, Integer> toggleButtonChronometerMap = new HashMap<>();
+    @SuppressLint("UseSparseArrays")
     Map<Integer, Integer> timeValuesChronometerIdMap = new HashMap<>();
-    ArrayList<ToggleButton> toggleButtonList;
+    ArrayList<ToggleButton> toggleButtonList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,32 +48,29 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
 
         spinner = findViewById(R.id.spinner3);
         editText = findViewById(R.id.editText);
-        toggleButtonList = new ArrayList<>();
-        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+        notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         ringtone = RingtoneManager.getRingtone(getApplicationContext(), notification);
 
-        if (savedInstanceState != null) {
-            for (int i = 1; i < 9; i++) {
-                String currentCountStr = savedInstanceState.getString(chrCurrentTime + i);
+        for (int i = 1; i < 9; i++) {
+            toggleButtonId = getResources().getIdentifier(getString(R.string.toggleBtn) + i, getString(R.string.id), getPackageName());
+            chronometerId = getResources().getIdentifier(getString(R.string.chr) + i, getString(R.string.id), getPackageName());
+            chronometerMap.put(i, (Chronometer) findViewById(chronometerId));
+            toggleButtonList.add((ToggleButton) findViewById(toggleButtonId));
+            toggleButtonChronometerMap.put(toggleButtonId, chronometerId);
+            chronometerMap.get(i).setOnChronometerTickListener(this);
+            toggleButtonList.get(i - POSITION_INDEX_SHIFT).setOnCheckedChangeListener(this);
+
+            if (savedInstanceState != null) {
+                String currentCountStr = savedInstanceState.getString(getString(R.string.chrCurrentTime) + i);
                 int currentCount = convert(currentCountStr);
-                int startTime = savedInstanceState.getInt(chrStartTime + i);
-
-                int toggleButtonId = getResources().getIdentifier(toggleButton + i, "id", getPackageName());
-                int chronometerId = getResources().getIdentifier(chronometer + i, "id", getPackageName());
-
+                int startTime = savedInstanceState.getInt(getString(R.string.chrStartTime) + i);
                 timeValuesChronometerIdMap.put(chronometerId, startTime);
-
-                chronometerMap.put(i, (Chronometer) findViewById(chronometerId));
-                chronometerMap.get(i).setBase(SystemClock.elapsedRealtime() + 1000 * currentCount);
-                chronometerMap.get(i).setOnChronometerTickListener(this);
-
-                toggleButtonChronometerMap.put(toggleButtonId, chronometerId);
-
-                toggleButtonList.add((ToggleButton) findViewById(toggleButtonId));
-                toggleButtonList.get(i - POSITION_INDEX_SHIFT).setOnCheckedChangeListener(this);
+                chronometerMap.get(i).setBase(SystemClock.elapsedRealtime() + BASE_TIME * currentCount);
+            } else {
+                int[] initTime = getResources().getIntArray(R.array.chrInitValues);
+                timeValuesChronometerIdMap.put(chronometerId, (initTime[i - POSITION_INDEX_SHIFT]));
+                chronometerMap.get(i).setBase(SystemClock.elapsedRealtime() + BASE_TIME * initTime[i - POSITION_INDEX_SHIFT]);
             }
-        } else {
-            initializationLoop();
         }
     }
 
@@ -76,24 +78,6 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
     protected void onDestroy() {
         ringtone.stop();
         super.onDestroy();
-    }
-
-    private void initializationLoop() {
-        for (int i = 1; i < 9; i++) {
-            int chronometerId = getResources().getIdentifier(chronometer + i, "id", getPackageName());
-            int toggleButtonId = getResources().getIdentifier(toggleButton + i, "id", getPackageName());
-
-            timeValuesChronometerIdMap.put(chronometerId, 10 + i * 2);
-
-            chronometerMap.put(i, (Chronometer) findViewById(chronometerId));
-            chronometerMap.get(i).setBase(SystemClock.elapsedRealtime() + 1000 * timeValuesChronometerIdMap.get(chronometerId));
-            chronometerMap.get(i).setOnChronometerTickListener(this);
-
-            toggleButtonChronometerMap.put(toggleButtonId, chronometerId);
-
-            toggleButtonList.add((ToggleButton) findViewById(toggleButtonId));
-            toggleButtonList.get(i - POSITION_INDEX_SHIFT).setOnCheckedChangeListener(this);
-        }
     }
 
     private static int convert(String time) {
@@ -108,11 +92,11 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
         long elapsedMillis = SystemClock.elapsedRealtime() - chronometer.getBase();
         if (elapsedMillis >= 0) {
             chronometer.stop();
-            Toast.makeText(MainActivity.this, chronometer.getTransitionName() + " is out of time",
+            Toast.makeText(MainActivity.this, chronometer.getTransitionName() + " " + getString(R.string.outOfTime),
                     Toast.LENGTH_SHORT).show();
             ringtone.play();
             Animation animation = new AlphaAnimation(0.0f, 1.0f);
-            animation.setDuration(50); //You can manage the blinking time with this parameter
+            animation.setDuration(ANIM_DURATION); //You can manage the blinking time with this parameter
             animation.setStartOffset(20);
             animation.setRepeatMode(Animation.REVERSE);
             animation.setRepeatCount(Animation.INFINITE);
@@ -127,9 +111,9 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
             int position = spinner.getSelectedItemPosition() + POSITION_INDEX_SHIFT;
             Chronometer chr = chronometerMap.get(position);
             timeValuesChronometerIdMap.put(chr.getId(), Integer.parseInt(time));
-            chr.setBase(SystemClock.elapsedRealtime() + 1000 * timeValuesChronometerIdMap.get(chr.getId()));
+            chr.setBase(SystemClock.elapsedRealtime() + BASE_TIME * timeValuesChronometerIdMap.get(chr.getId()));
         } else
-            Toast.makeText(this, "Please enter number of seconds to set", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.editTextCheck, Toast.LENGTH_SHORT).show();
     }
 
 
@@ -147,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
         if (isChecked) {
             String currentTime = chronometer.getText().toString();
             int time = convert(currentTime);
-            chronometer.setBase(SystemClock.elapsedRealtime() + 1000 * time);
+            chronometer.setBase(SystemClock.elapsedRealtime() + BASE_TIME * time);
             chronometer.start();
         } else {
             chronometer.stop();
@@ -156,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
             }
             chronometer.clearAnimation();
             chronometer.setTextColor(Color.WHITE);
-            chronometer.setBase(SystemClock.elapsedRealtime() + 1000 * timeValuesChronometerIdMap.get(chronometerId));
+            chronometer.setBase(SystemClock.elapsedRealtime() + BASE_TIME * timeValuesChronometerIdMap.get(chronometerId));
         }
     }
 
@@ -169,9 +153,9 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
     @Override
     public void onSaveInstanceState(Bundle outState) {
         for (int i = 1; i < 9; i++) {
-            int chronometerId = getResources().getIdentifier(chronometer + i, "id", getPackageName());
-            outState.putString(chrCurrentTime + i, chronometerMap.get(i).getText().toString());
-            outState.putInt(chrStartTime + i, timeValuesChronometerIdMap.get(chronometerId));
+            chronometerId = getResources().getIdentifier(getString(R.string.chr) + i, getString(R.string.id), getPackageName());
+            outState.putString(getString(R.string.chrCurrentTime) + i, chronometerMap.get(i).getText().toString());
+            outState.putInt(getString(R.string.chrStartTime) + i, timeValuesChronometerIdMap.get(chronometerId));
         }
         super.onSaveInstanceState(outState);
     }

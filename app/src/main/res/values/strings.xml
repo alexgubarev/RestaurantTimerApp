@@ -19,6 +19,14 @@
     <string name="six">6</string>
     <string name="seven">7</string>
     <string name="eight">8</string>
+    <string name="editTextCheck">Please enter number of seconds to set</string>
+    <string name="outOfTime">is out of time</string>
+    <string name="chr">chronometer</string>
+    <string name="toggleBtn">toggleButton</string>
+    <string name="chrCurrentTime">chronometerCurrentTime</string>
+    <string name="chrStartTime">chronometerStartTime</string>
+    <string name="id">id</string>
+    <string name="enter_seconds">Enter seconds</string>
 
 
     <string-array name="chronometerId">
@@ -31,4 +39,15 @@
         <item>7</item>
         <item>8</item>
     </string-array>
+
+    <integer-array name="chrInitValues">
+        <item>10</item>
+        <item>20</item>
+        <item>60</item>
+        <item>120</item>
+        <item>5</item>
+        <item>30</item>
+        <item>15</item>
+        <item>180</item>
+    </integer-array>
 </resources>
