@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
     Map<Integer, Integer> timeValuesChronometerIdMap = new HashMap<>();
     ArrayList<ToggleButton> toggleButtonList = new ArrayList<>();
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
 
             if (savedInstanceState != null) {
                 String currentCountStr = savedInstanceState.getString(getString(R.string.chrCurrentTime) + i);
-                int currentCount = convert(currentCountStr);
+                int currentCount = convertString(currentCountStr);
                 int startTime = savedInstanceState.getInt(getString(R.string.chrStartTime) + i);
                 timeValuesChronometerIdMap.put(chronometerId, startTime);
                 chronometerMap.get(i).setBase(SystemClock.elapsedRealtime() + BASE_TIME * currentCount);
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
                 int[] initTime = getResources().getIntArray(R.array.chrInitValues);
                 timeValuesChronometerIdMap.put(chronometerId, (initTime[i - POSITION_INDEX_SHIFT]));
                 chronometerMap.get(i).setBase(SystemClock.elapsedRealtime() + BASE_TIME * initTime[i - POSITION_INDEX_SHIFT]);
+                chronometerMap.get(i).setText(DateUtils.formatElapsedTime(initTime[i - POSITION_INDEX_SHIFT]));
             }
         }
     }
@@ -80,18 +83,21 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
         super.onDestroy();
     }
 
-    private static int convert(String time) {
+    private static int convertString(String time) {
         int quoteInd = time.indexOf(":");
         int min = Integer.valueOf(time.substring(0, quoteInd));
         int sec = Integer.valueOf(time.substring(++quoteInd));
         return ((min * 60) + sec);
     }
 
+
+    @SuppressLint("SetTextI18n")
     @Override
     public void onChronometerTick(Chronometer chronometer) {
         long elapsedMillis = SystemClock.elapsedRealtime() - chronometer.getBase();
-        if (elapsedMillis >= 0) {
+        if (elapsedMillis > 0) {
             chronometer.stop();
+            chronometer.setText("00:00");
             Toast.makeText(MainActivity.this, chronometer.getTransitionName() + " " + getString(R.string.outOfTime),
                     Toast.LENGTH_SHORT).show();
             ringtone.play();
@@ -112,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
             Chronometer chr = chronometerMap.get(position);
             timeValuesChronometerIdMap.put(chr.getId(), Integer.parseInt(time));
             chr.setBase(SystemClock.elapsedRealtime() + BASE_TIME * timeValuesChronometerIdMap.get(chr.getId()));
+            chr.setText(DateUtils.formatElapsedTime(Integer.parseInt(time)));
         } else
             Toast.makeText(this, R.string.editTextCheck, Toast.LENGTH_SHORT).show();
     }
@@ -130,8 +137,9 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
         }
         if (isChecked) {
             String currentTime = chronometer.getText().toString();
-            int time = convert(currentTime);
+            int time = convertString(currentTime);
             chronometer.setBase(SystemClock.elapsedRealtime() + BASE_TIME * time);
+            chronometer.setText(DateUtils.formatElapsedTime(time));
             chronometer.start();
         } else {
             chronometer.stop();
@@ -141,6 +149,7 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
             chronometer.clearAnimation();
             chronometer.setTextColor(Color.WHITE);
             chronometer.setBase(SystemClock.elapsedRealtime() + BASE_TIME * timeValuesChronometerIdMap.get(chronometerId));
+            chronometer.setText(DateUtils.formatElapsedTime(timeValuesChronometerIdMap.get(chronometerId)));
         }
     }
 
