@@ -16,7 +16,7 @@
         android:background="@drawable/toggle_selector"
         android:textOff="@string/two"
         android:textOn="@string/reset"
-        android:textSize="18sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/chronometer2"
         app:layout_constraintStart_toEndOf="@+id/chronometer2" />
 
@@ -28,6 +28,7 @@
         android:background="@drawable/toggle_selector"
         android:textOff="@string/six"
         android:textOn="@string/reset"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/chronometer6"
         app:layout_constraintStart_toEndOf="@+id/chronometer6" />
 
@@ -59,7 +60,7 @@
         android:background="@drawable/toggle_selector"
         android:textOff="@string/four"
         android:textOn="@string/reset"
-        android:textSize="18sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/chronometer4"
         app:layout_constraintStart_toEndOf="@+id/chronometer4" />
 
@@ -81,7 +82,7 @@
         android:background="@drawable/toggle_selector"
         android:textOff="@string/eight"
         android:textOn="@string/reset"
-        android:textSize="18sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/chronometer8"
         app:layout_constraintStart_toEndOf="@+id/chronometer8" />
 
@@ -113,7 +114,7 @@
         android:background="@drawable/toggle_selector"
         android:textOff="@string/one"
         android:textOn="@string/reset"
-        android:textSize="18sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/chronometer1"
         app:layout_constraintStart_toEndOf="@+id/chronometer1" />
 
@@ -135,7 +136,7 @@
         android:background="@drawable/toggle_selector"
         android:textOff="@string/three"
         android:textOn="@string/reset"
-        android:textSize="18sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/chronometer3"
         app:layout_constraintStart_toEndOf="@+id/chronometer3" />
 
@@ -147,7 +148,7 @@
         android:background="@drawable/toggle_selector"
         android:textOff="@string/five"
         android:textOn="@string/reset"
-        android:textSize="18sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/chronometer5"
         app:layout_constraintStart_toEndOf="@+id/chronometer5" />
 
@@ -179,7 +180,7 @@
         android:background="@drawable/toggle_selector"
         android:textOff="@string/seven"
         android:textOn="@string/reset"
-        android:textSize="18sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/chronometer7"
         app:layout_constraintStart_toEndOf="@+id/chronometer7" />
 

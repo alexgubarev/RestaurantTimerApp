@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
         long elapsedMillis = SystemClock.elapsedRealtime() - chronometer.getBase();
         if (elapsedMillis > 0) {
             chronometer.stop();
-            chronometer.setText("00:00");
+            chronometer.setText(R.string.zeroTime);
             Toast.makeText(MainActivity.this, chronometer.getTransitionName() + " " + getString(R.string.outOfTime),
                     Toast.LENGTH_SHORT).show();
             ringtone.play();
@@ -114,11 +114,13 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
     public void onClickApplyBtn(View view) {
         String time = editText.getText().toString();
         if (!time.isEmpty()) {
-            int position = spinner.getSelectedItemPosition() + POSITION_INDEX_SHIFT;
-            Chronometer chr = chronometerMap.get(position);
+            int position = spinner.getSelectedItemPosition();
+            Chronometer chr = chronometerMap.get(position + POSITION_INDEX_SHIFT);
             timeValuesChronometerIdMap.put(chr.getId(), Integer.parseInt(time));
-            chr.setBase(SystemClock.elapsedRealtime() + BASE_TIME * timeValuesChronometerIdMap.get(chr.getId()));
-            chr.setText(DateUtils.formatElapsedTime(Integer.parseInt(time)));
+            if (!toggleButtonList.get(position).isChecked()) {
+                chr.setBase(SystemClock.elapsedRealtime() + BASE_TIME * timeValuesChronometerIdMap.get(chr.getId()));
+                chr.setText(DateUtils.formatElapsedTime(Integer.parseInt(time)));
+            }
         } else
             Toast.makeText(this, R.string.editTextCheck, Toast.LENGTH_SHORT).show();
     }

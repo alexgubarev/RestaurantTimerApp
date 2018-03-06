@@ -27,6 +27,7 @@
     <string name="chrStartTime">chronometerStartTime</string>
     <string name="id">id</string>
     <string name="enter_seconds">Enter seconds</string>
+    <string name="zeroTime">00:00</string>
 
 
     <string-array name="chronometerId">
