@@ -8,8 +8,8 @@
     <string name="tv6">Sanders</string>
     <string name="tv7">French fries</string>
     <string name="tv8">Salad</string>
-    <string name="btnReset">Reset all timers</string>
-    <string name="btnApply">Apply changes</string>
+    <string name="btnReset">Reset all</string>
+    <string name="btnApply">Apply</string>
     <string name="reset">Reset</string>
     <string name="one">1</string>
     <string name="two">2</string>
