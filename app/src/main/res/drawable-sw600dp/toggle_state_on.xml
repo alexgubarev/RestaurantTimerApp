@@ -2,9 +2,9 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="oval">
-            <stroke android:color="#FFFFFF" android:width="1dp" />
+            <stroke android:color="#FFFFFF" android:width="5dp" />
             <solid android:color="#1E90FF"/>
-            <size android:width="15dp" android:height="15dp"/>
+            <size android:width="65dp" android:height="65dp"/>
         </shape>
     </item>
 </selector>

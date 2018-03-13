@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
                 int startTime = savedInstanceState.getInt(getString(R.string.chrStartTime) + i);
                 timeValuesChronometerIdMap.put(chronometerId, startTime);
                 chronometerMap.get(i).setBase(SystemClock.elapsedRealtime() + BASE_TIME * currentCount);
+                chronometerMap.get(i).setText(DateUtils.formatElapsedTime(currentCount));
             } else {
                 int[] initTime = getResources().getIntArray(R.array.chrInitValues);
                 timeValuesChronometerIdMap.put(chronometerId, (initTime[i - POSITION_INDEX_SHIFT]));

@@ -3,7 +3,7 @@
     package="com.kfc.restauranttimerapp">
 
     <supports-screens android:smallScreens="false"
-        android:normalScreens="false"
+        android:normalScreens="true"
         android:largeScreens="true"
         android:xlargeScreens="true"/>
 
