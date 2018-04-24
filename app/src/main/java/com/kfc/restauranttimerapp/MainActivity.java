@@ -1,6 +1,7 @@
 package com.kfc.restauranttimerapp;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -9,13 +10,13 @@ import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Chronometer;
 import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -30,8 +31,6 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
     public static int ANIM_DURATION = 60;
     int chronometerId;
     int toggleButtonId;
-    EditText editText;
-    Spinner spinner;
     Ringtone ringtone;
     Uri notification;
     @SuppressLint("UseSparseArrays")
@@ -48,8 +47,6 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        spinner = findViewById(R.id.spinner3);
-        editText = findViewById(R.id.editText);
         notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         ringtone = RingtoneManager.getRingtone(getApplicationContext(), notification);
 
@@ -84,6 +81,22 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
         super.onDestroy();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings){
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private static int convertString(String time) {
         int quoteInd = time.indexOf(":");
         int min = Integer.valueOf(time.substring(0, quoteInd));
@@ -112,19 +125,7 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
         }
     }
 
-    public void onClickApplyBtn(View view) {
-        String time = editText.getText().toString();
-        if (!time.isEmpty()) {
-            int position = spinner.getSelectedItemPosition();
-            Chronometer chr = chronometerMap.get(position + POSITION_INDEX_SHIFT);
-            timeValuesChronometerIdMap.put(chr.getId(), Integer.parseInt(time));
-            if (!toggleButtonList.get(position).isChecked()) {
-                chr.setBase(SystemClock.elapsedRealtime() + BASE_TIME * timeValuesChronometerIdMap.get(chr.getId()));
-                chr.setText(DateUtils.formatElapsedTime(Integer.parseInt(time)));
-            }
-        } else
-            Toast.makeText(this, R.string.editTextCheck, Toast.LENGTH_SHORT).show();
-    }
+
 
 
     @Override
