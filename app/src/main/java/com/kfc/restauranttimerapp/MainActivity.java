@@ -78,10 +78,20 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
 
 
         Bundle extras = getIntent().getExtras();
-        if (extras != null) {
+
+        boolean isAllNotChecked = true;
+        for (ToggleButton toggleButton : toggleButtonList) {
+            if (toggleButton.isChecked()) {
+                isAllNotChecked = false;
+                break;
+            }
+        }
+        if (extras != null && !isAllNotChecked) {
+            Log.d("mylogs", "extras not null");
             Intent intent = getIntent();
             HashMap<Integer, Integer> hashMap;
             hashMap = (HashMap<Integer, Integer>) intent.getSerializableExtra("map");
+
 
             for (int i = 1; i < 9; i++) {
                 Chronometer chr = chronometerMap.get(i);
