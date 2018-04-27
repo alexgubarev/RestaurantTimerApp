@@ -10,6 +10,7 @@ import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         ringtone = RingtoneManager.getRingtone(getApplicationContext(), notification);
 
@@ -73,6 +75,21 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
                 chronometerMap.get(i).setText(DateUtils.formatElapsedTime(initTime[i - POSITION_INDEX_SHIFT]));
             }
         }
+
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            Intent intent = getIntent();
+            HashMap<Integer, Integer> hashMap;
+            hashMap = (HashMap<Integer, Integer>) intent.getSerializableExtra("map");
+
+            for (int i = 1; i < 9; i++) {
+                Chronometer chr = chronometerMap.get(i);
+                timeValuesChronometerIdMap.put(chr.getId(), hashMap.get(i - 1));
+                chr.setBase(SystemClock.elapsedRealtime() + BASE_TIME * timeValuesChronometerIdMap.get(chr.getId()));
+                chr.setText(DateUtils.formatElapsedTime(hashMap.get(i - 1)));
+            }
+        }
     }
 
     @Override
@@ -90,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings){
+        if (id == R.id.action_settings) {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(intent);
         }
@@ -124,8 +141,6 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
             chronometer.startAnimation(animation);
         }
     }
-
-
 
 
     @Override
