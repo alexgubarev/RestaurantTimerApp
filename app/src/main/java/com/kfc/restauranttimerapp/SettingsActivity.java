@@ -19,8 +19,8 @@ public class SettingsActivity extends AppCompatActivity {
     Intent intent;
     EditText editText;
     Spinner spinner;
+
     @SuppressLint("UseSparseArrays")
-    Map<Integer, Integer> chridTimeMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +31,6 @@ public class SettingsActivity extends AppCompatActivity {
         editText = findViewById(R.id.editText);
         intent = new Intent(SettingsActivity.this, MainActivity.class);
 
-        for (int i = 0; i < 8; i++) {
-            int[] initTime = getResources().getIntArray(R.array.chrInitValues);
-            chridTimeMap.put(i, initTime[i]);
-        }
-
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
 
@@ -43,7 +38,6 @@ public class SettingsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            intent.putExtra("map", (Serializable) chridTimeMap);
             startActivity(intent);
 
         }
@@ -55,7 +49,9 @@ public class SettingsActivity extends AppCompatActivity {
         String time = editText.getText().toString();
         if (!time.isEmpty()) {
             int position = spinner.getSelectedItemPosition();
-            chridTimeMap.put(position, Integer.parseInt(time));
+
+            DatabaseHandler db = new DatabaseHandler(this);
+            db.updateTime(new TimeChronometer(position + 1, Integer.parseInt(time)));
 
         } else
             Toast.makeText(this, R.string.editTextCheck, Toast.LENGTH_SHORT).show();

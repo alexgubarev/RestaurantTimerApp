@@ -2,6 +2,7 @@ package com.kfc.restauranttimerapp;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -10,7 +11,6 @@ import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +23,7 @@ import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements Chronometer.OnChronometerTickListener, CompoundButton.OnCheckedChangeListener {
@@ -48,6 +49,25 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        DatabaseHandler db = new DatabaseHandler(this);
+
+        final String PREFS_NAME = "MyPrefsFile";
+
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+
+        if (settings.getBoolean("my_first_time", true)) {
+            //the app is being launched for first time
+            int[] initTime = getResources().getIntArray(R.array.chrInitValues);
+            for (int i = 0; i < 8; i++) {
+                db.addTime(new TimeChronometer(i + 1, initTime[i]));
+            }
+            // first time task
+            // record the fact that the app has been started at least once
+            settings.edit().putBoolean("my_first_time", false).commit();
+        }
+
+
+        List<TimeChronometer> timeChronometers = db.getAllValues();
 
         notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         ringtone = RingtoneManager.getRingtone(getApplicationContext(), notification);
@@ -69,44 +89,22 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
                 chronometerMap.get(i).setBase(SystemClock.elapsedRealtime() + BASE_TIME * currentCount);
                 chronometerMap.get(i).setText(DateUtils.formatElapsedTime(currentCount));
             } else {
-                int[] initTime = getResources().getIntArray(R.array.chrInitValues);
-                timeValuesChronometerIdMap.put(chronometerId, (initTime[i - POSITION_INDEX_SHIFT]));
-                chronometerMap.get(i).setBase(SystemClock.elapsedRealtime() + BASE_TIME * initTime[i - POSITION_INDEX_SHIFT]);
-                chronometerMap.get(i).setText(DateUtils.formatElapsedTime(initTime[i - POSITION_INDEX_SHIFT]));
+//                int[] initTime = getResources().getIntArray(R.array.chrInitValues);
+                timeValuesChronometerIdMap.put(chronometerId, timeChronometers.get(i - 1).get_time());
+                chronometerMap.get(i).setBase(SystemClock.elapsedRealtime() + BASE_TIME * timeChronometers.get(i - 1).get_time());
+                chronometerMap.get(i).setText(DateUtils.formatElapsedTime(timeChronometers.get(i - 1).get_time()));
             }
         }
 
-
-        Bundle extras = getIntent().getExtras();
-
-        boolean isAllNotChecked = true;
-        for (ToggleButton toggleButton : toggleButtonList) {
-            if (toggleButton.isChecked()) {
-                isAllNotChecked = false;
-                break;
-            }
-        }
-        if (extras != null && !isAllNotChecked) {
-            Log.d("mylogs", "extras not null");
-            Intent intent = getIntent();
-            HashMap<Integer, Integer> hashMap;
-            hashMap = (HashMap<Integer, Integer>) intent.getSerializableExtra("map");
-
-
-            for (int i = 1; i < 9; i++) {
-                Chronometer chr = chronometerMap.get(i);
-                timeValuesChronometerIdMap.put(chr.getId(), hashMap.get(i - 1));
-                chr.setBase(SystemClock.elapsedRealtime() + BASE_TIME * timeValuesChronometerIdMap.get(chr.getId()));
-                chr.setText(DateUtils.formatElapsedTime(hashMap.get(i - 1)));
-            }
-        }
     }
+
 
     @Override
     protected void onDestroy() {
         ringtone.stop();
         super.onDestroy();
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -173,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
         } else {
             chronometer.stop();
             if (isAllNotChecked) {
-                ringtone.stop();
+            ringtone.stop();
             }
             chronometer.clearAnimation();
             chronometer.setTextColor(Color.WHITE);
