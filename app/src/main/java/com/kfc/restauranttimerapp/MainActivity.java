@@ -155,13 +155,7 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         int chronometerId = toggleButtonChronometerMap.get(buttonView.getId());
         Chronometer chronometer = findViewById(chronometerId);
-        boolean isAllNotChecked = true;
-        for (ToggleButton toggleButton : toggleButtonList) {
-            if (toggleButton.isChecked()) {
-                isAllNotChecked = false;
-                break;
-            }
-        }
+
         if (isChecked) {
             String currentTime = chronometer.getText().toString();
             int time = convertString(currentTime);
@@ -170,9 +164,9 @@ public class MainActivity extends AppCompatActivity implements Chronometer.OnChr
             chronometer.start();
         } else {
             chronometer.stop();
-            if (isAllNotChecked) {
+
             ringtone.stop();
-            }
+
             chronometer.clearAnimation();
             chronometer.setTextColor(Color.WHITE);
             chronometer.setBase(SystemClock.elapsedRealtime() + BASE_TIME * timeValuesChronometerIdMap.get(chronometerId));
